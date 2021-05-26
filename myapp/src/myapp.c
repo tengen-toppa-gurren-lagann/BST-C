@@ -1,24 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h> // Для getopt()
+#include <unistd.h> // Р”Р»СЏ getopt()
 #include "bst.h"
 
-// Демонстрационная программа, использующая статическую библиотеку двоичного дерева поиска
+// Р”РµРјРѕРЅСЃС‚СЂР°С†РёРѕРЅРЅР°СЏ РїСЂРѕРіСЂР°РјРјР°, РёСЃРїРѕР»СЊР·СѓСЋС‰Р°СЏ СЃС‚Р°С‚РёС‡РµСЃРєСѓСЋ Р±РёР±Р»РёРѕС‚РµРєСѓ РґРІРѕРёС‡РЅРѕРіРѕ РґРµСЂРµРІР° РїРѕРёСЃРєР°
 int main(int argc, char **argv) {
-    // Подсказка об использовании программы
+    // РџРѕРґСЃРєР°Р·РєР° РѕР± РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё РїСЂРѕРіСЂР°РјРјС‹
     const char *sUsage = "myapp (binary search tree test program) usage:\nmyapp -a inputFileWithNumbersToAdd -d inputFileWithNumbersToDelete -o outputFile\n";
 
-    // Разбираем командную строку
-    if(argc < 7) { // Eсли аргументов недостаточно, выводим справку
+    // Р Р°Р·Р±РёСЂР°РµРј РєРѕРјР°РЅРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ
+    if(argc < 7) { // EСЃР»Рё Р°СЂРіСѓРјРµРЅС‚РѕРІ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ, РІС‹РІРѕРґРёРј СЃРїСЂР°РІРєСѓ
         printf("%s", sUsage);
         return -1;
     }
-    char *opts = "a:d:o:"; // Опции, каждая имеет аргумент
+    char *opts = "a:d:o:"; // РћРїС†РёРё, РєР°Р¶РґР°СЏ РёРјРµРµС‚ Р°СЂРіСѓРјРµРЅС‚
     char *inputFilenameAdd = 0;
     char *inputFilenameDel = 0;
     char *outputFilename = 0;
-    int  opt; // Прочитанная опция
-    while ((opt = getopt(argc, argv, opts)) != -1 ) { // Вызываем getopt(), пока она не вернет -1
+    int  opt; // РџСЂРѕС‡РёС‚Р°РЅРЅР°СЏ РѕРїС†РёСЏ
+    while ((opt = getopt(argc, argv, opts)) != -1 ) { // Р’С‹Р·С‹РІР°РµРј getopt(), РїРѕРєР° РѕРЅР° РЅРµ РІРµСЂРЅРµС‚ -1
         switch(opt) {
             case 'a':
                 inputFilenameAdd = optarg;
@@ -31,12 +31,12 @@ int main(int argc, char **argv) {
                 break;
         }
     }
-    if (inputFilenameAdd == NULL || inputFilenameDel == NULL || outputFilename == NULL) { // В командной строке не заданы или неверно заданы имена файлов
+    if (inputFilenameAdd == NULL || inputFilenameDel == NULL || outputFilename == NULL) { // Р’ РєРѕРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРµ РЅРµ Р·Р°РґР°РЅС‹ РёР»Рё РЅРµРІРµСЂРЅРѕ Р·Р°РґР°РЅС‹ РёРјРµРЅР° С„Р°Р№Р»РѕРІ
         printf("%s", sUsage);
         return -1;
     }
 
-    // Контрольный вывод прочитанных из командной строки имен файлов, открытие файлов
+    // РљРѕРЅС‚СЂРѕР»СЊРЅС‹Р№ РІС‹РІРѕРґ РїСЂРѕС‡РёС‚Р°РЅРЅС‹С… РёР· РєРѕРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРё РёРјРµРЅ С„Р°Р№Р»РѕРІ, РѕС‚РєСЂС‹С‚РёРµ С„Р°Р№Р»РѕРІ
     printf("File with numbers to add: %s\nFile with numbers to delete: %s\nOutput file: %s\n", inputFilenameAdd, inputFilenameDel, outputFilename);
     FILE *inputFileAdd, *inputFileDel, *outputFile;
     inputFileAdd = fopen(inputFilenameAdd, "r");
@@ -55,18 +55,18 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    // Создаем дерево
+    // РЎРѕР·РґР°РµРј РґРµСЂРµРІРѕ
     tree *test_tree = createTree();
 
-    // Добавляем в дерево узлы, заданные во входном файле
+    // Р”РѕР±Р°РІР»СЏРµРј РІ РґРµСЂРµРІРѕ СѓР·Р»С‹, Р·Р°РґР°РЅРЅС‹Рµ РІРѕ РІС…РѕРґРЅРѕРј С„Р°Р№Р»Рµ
     int value;
     while (fscanf(inputFileAdd, "%d", &value) != EOF) {
         addNode(test_tree, value);
     };
 
-//	outputFile = stdout; // Для отладки (вывод не в файл, а в консоль)
+//	outputFile = stdout; // Р”Р»СЏ РѕС‚Р»Р°РґРєРё (РІС‹РІРѕРґ РЅРµ РІ С„Р°Р№Р», Р° РІ РєРѕРЅСЃРѕР»СЊ)
     
-    // Выводим сформированное дерево (тремя способами обхода), его размер, а также минимальный и максимальный узлы
+    // Р’С‹РІРѕРґРёРј СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅРѕРµ РґРµСЂРµРІРѕ (С‚СЂРµРјСЏ СЃРїРѕСЃРѕР±Р°РјРё РѕР±С…РѕРґР°), РµРіРѕ СЂР°Р·РјРµСЂ, Р° С‚Р°РєР¶Рµ РјРёРЅРёРјР°Р»СЊРЅС‹Р№ Рё РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓР·Р»С‹
     fprintf(outputFile, "Binary Search Tree\n");
     fprintf(outputFile, "==================\n");
     fprintf(outputFile, "PREORDER TRAVERSAL:\n");
@@ -88,8 +88,8 @@ int main(int argc, char **argv) {
     fprintf(outputFile, "Max node: %d\n", nodeValue(tree_max));
     fprintf(outputFile, "-------------\n");
 
-    // По очереди удаляем из дерева узлы, заданные во входном файле, и выводим дерево, его размер, минимальный и максимальный узлы,
-    // а также проверяем наличие в дереве двух произвольно заданных узлов
+    // РџРѕ РѕС‡РµСЂРµРґРё СѓРґР°Р»СЏРµРј РёР· РґРµСЂРµРІР° СѓР·Р»С‹, Р·Р°РґР°РЅРЅС‹Рµ РІРѕ РІС…РѕРґРЅРѕРј С„Р°Р№Р»Рµ, Рё РІС‹РІРѕРґРёРј РґРµСЂРµРІРѕ, РµРіРѕ СЂР°Р·РјРµСЂ, РјРёРЅРёРјР°Р»СЊРЅС‹Р№ Рё РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓР·Р»С‹,
+    // Р° С‚Р°РєР¶Рµ РїСЂРѕРІРµСЂСЏРµРј РЅР°Р»РёС‡РёРµ РІ РґРµСЂРµРІРµ РґРІСѓС… РїСЂРѕРёР·РІРѕР»СЊРЅРѕ Р·Р°РґР°РЅРЅС‹С… СѓР·Р»РѕРІ
     while (fscanf(inputFileDel, "%d", &value) != EOF) {
         removeNode(test_tree, value);
         fprintf(outputFile, "\nTree after deleting %d:\n", value);
@@ -118,15 +118,16 @@ int main(int argc, char **argv) {
         fprintf(outputFile, "-------------\n");
     };
 
-    // Закрываем файлы
+    // Р—Р°РєСЂС‹РІР°РµРј С„Р°Р№Р»С‹
     fclose(inputFileAdd);
     fclose(inputFileDel);
     fclose(outputFile);
 
-    // Освобождаем память, занятую деревом
+    // РћСЃРІРѕР±РѕР¶РґР°РµРј РїР°РјСЏС‚СЊ, Р·Р°РЅСЏС‚СѓСЋ РґРµСЂРµРІРѕРј
     destroyTree(test_tree);
      
     return 0;
  
 }
+
 
