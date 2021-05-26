@@ -3,68 +3,68 @@
 #include "mytests.h"
 #include "bst.h"
 
-// Тестовая программа, реализующая модульные тесты для функций статической библиотеки двоичного дерева поиска
+// РўРµСЃС‚РѕРІР°СЏ РїСЂРѕРіСЂР°РјРјР°, СЂРµР°Р»РёР·СѓСЋС‰Р°СЏ РјРѕРґСѓР»СЊРЅС‹Рµ С‚РµСЃС‚С‹ РґР»СЏ С„СѓРЅРєС†РёР№ СЃС‚Р°С‚РёС‡РµСЃРєРѕР№ Р±РёР±Р»РёРѕС‚РµРєРё РґРІРѕРёС‡РЅРѕРіРѕ РґРµСЂРµРІР° РїРѕРёСЃРєР°
 int main() {
     int result;
 	
-    // Тест для createTree()
+    // РўРµСЃС‚ РґР»СЏ createTree()
     tree *bst = NULL;
     ASSERT_NULL(bst);
     bst = createTree();
     ASSERT_NOT_NULL(bst);
     int size = treeSize(bst);
-    ASSERT_EQUALS(size,0); // Дерево должно быть пустое
+    ASSERT_EQUALS(size,0); // Р”РµСЂРµРІРѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїСѓСЃС‚РѕРµ
    
-    // Тесты для addNode(), containsNode() и treeSize()
-    const int iMin = 1;  // Зададим минимальный узел
-    const int iMax = 101; // Зададим максимальный узел
-    const int iStep = 10;// Шаг изменения в цикле
+    // РўРµСЃС‚С‹ РґР»СЏ addNode(), containsNode() Рё treeSize()
+    const int iMin = 1;  // Р—Р°РґР°РґРёРј РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СѓР·РµР»
+    const int iMax = 101; // Р—Р°РґР°РґРёРј РјР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СѓР·РµР»
+    const int iStep = 10;// РЁР°Рі РёР·РјРµРЅРµРЅРёСЏ РІ С†РёРєР»Рµ
     int cnt = 0;
     printf("Adding nodes to tree:");
-    for (int i=iMin; i<=iMax; i+=iStep) { // Добавляем узлы в дерево (от минимального до максимального) и проверяем как они добавились
+    for (int i=iMin; i<=iMax; i+=iStep) { // Р”РѕР±Р°РІР»СЏРµРј СѓР·Р»С‹ РІ РґРµСЂРµРІРѕ (РѕС‚ РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ РґРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ) Рё РїСЂРѕРІРµСЂСЏРµРј РєР°Рє РѕРЅРё РґРѕР±Р°РІРёР»РёСЃСЊ
         result = addNode(bst, i);
-        ASSERT_EQUALS(result, 1); // Должен быть добавлен
+        ASSERT_EQUALS(result, 1); // Р”РѕР»Р¶РµРЅ Р±С‹С‚СЊ РґРѕР±Р°РІР»РµРЅ
         cnt++;
-        int contains = containsNode(bst, i); // Узел (i) добавили 
-        ASSERT_TRUE(contains);               //  - проверим, что он есть в дереве
-        contains = containsNode(bst, i+1);   // Узел (i+1) не добавляли
-        ASSERT_FALSE(contains);              //  - проверим, что его нет в дереве
-        size = treeSize(bst); // Проверим увеличение размера дерева
+        int contains = containsNode(bst, i); // РЈР·РµР» (i) РґРѕР±Р°РІРёР»Рё 
+        ASSERT_TRUE(contains);               //  - РїСЂРѕРІРµСЂРёРј, С‡С‚Рѕ РѕРЅ РµСЃС‚СЊ РІ РґРµСЂРµРІРµ
+        contains = containsNode(bst, i+1);   // РЈР·РµР» (i+1) РЅРµ РґРѕР±Р°РІР»СЏР»Рё
+        ASSERT_FALSE(contains);              //  - РїСЂРѕРІРµСЂРёРј, С‡С‚Рѕ РµРіРѕ РЅРµС‚ РІ РґРµСЂРµРІРµ
+        size = treeSize(bst); // РџСЂРѕРІРµСЂРёРј СѓРІРµР»РёС‡РµРЅРёРµ СЂР°Р·РјРµСЂР° РґРµСЂРµРІР°
         ASSERT_EQUALS(size,cnt);
         printf("\n");
-        traverseTree(bst, stdout, INORDER); // Посмотрим на изменение дерева
+        traverseTree(bst, stdout, INORDER); // РџРѕСЃРјРѕС‚СЂРёРј РЅР° РёР·РјРµРЅРµРЅРёРµ РґРµСЂРµРІР°
     }
 	
-    // Тест для addNode() - попытка вставить уже существующий узел
+    // РўРµСЃС‚ РґР»СЏ addNode() - РїРѕРїС‹С‚РєР° РІСЃС‚Р°РІРёС‚СЊ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ СѓР·РµР»
     result = addNode(bst, iMin);
     ASSERT_EQUALS(result, 2);
-    // Тест для minNode()
+    // РўРµСЃС‚ РґР»СЏ minNode()
     int min = nodeValue(minNode(bst));
     ASSERT_EQUALS(min, iMin);
-    // Тест для maxNode()
+    // РўРµСЃС‚ РґР»СЏ maxNode()
     int max = nodeValue(maxNode(bst));
     ASSERT_EQUALS(max, iMax);
 
-    // Тест для removeNode() - попытка удалить несуществующий узел
+    // РўРµСЃС‚ РґР»СЏ removeNode() - РїРѕРїС‹С‚РєР° СѓРґР°Р»РёС‚СЊ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ СѓР·РµР»
     result = removeNode(bst, iMin+1);
     ASSERT_EQUALS(result, 0);
 
     printf("\n\nRemoving nodes from tree:");
-    // Тесты для removeNode(), containsNode() и treeSize()
+    // РўРµСЃС‚С‹ РґР»СЏ removeNode(), containsNode() Рё treeSize()
     for (int i=iMin; i<=iMax; i+=iStep) {
         result=removeNode(bst, i);
-        ASSERT_EQUALS(result, 1); // Должен быть удален
+        ASSERT_EQUALS(result, 1); // Р”РѕР»Р¶РµРЅ Р±С‹С‚СЊ СѓРґР°Р»РµРЅ
         cnt--;
-        int contains = containsNode(bst, i); // Узел (i) удалили
-        ASSERT_FALSE(contains);              //  - проверим, что его нет в дереве
-        size = treeSize(bst); // Проверим уменьшение размера дерева
+        int contains = containsNode(bst, i); // РЈР·РµР» (i) СѓРґР°Р»РёР»Рё
+        ASSERT_FALSE(contains);              //  - РїСЂРѕРІРµСЂРёРј, С‡С‚Рѕ РµРіРѕ РЅРµС‚ РІ РґРµСЂРµРІРµ
+        size = treeSize(bst); // РџСЂРѕРІРµСЂРёРј СѓРјРµРЅСЊС€РµРЅРёРµ СЂР°Р·РјРµСЂР° РґРµСЂРµРІР°
         ASSERT_EQUALS(size,cnt);
         printf("\n");
-        traverseTree(bst, stdout, INORDER); // Посмотрим на изменение дерева
+        traverseTree(bst, stdout, INORDER); // РџРѕСЃРјРѕС‚СЂРёРј РЅР° РёР·РјРµРЅРµРЅРёРµ РґРµСЂРµРІР°
     }
-    ASSERT_EQUALS(size,0); // Проверим, что удалены все узлы
+    ASSERT_EQUALS(size,0); // РџСЂРѕРІРµСЂРёРј, С‡С‚Рѕ СѓРґР°Р»РµРЅС‹ РІСЃРµ СѓР·Р»С‹
 
-    destroyTree(bst); // Удаляем дерево - освобождаем память
+    destroyTree(bst); // РЈРґР°Р»СЏРµРј РґРµСЂРµРІРѕ - РѕСЃРІРѕР±РѕР¶РґР°РµРј РїР°РјСЏС‚СЊ
 
     return 0;
 }
