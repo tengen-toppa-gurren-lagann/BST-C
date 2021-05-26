@@ -1,0 +1,1 @@
+myapp.exe -a add.txt -d del.txt -o out.txt

@@ -1,0 +1,273 @@
+Binary Search Tree
+==================
+PREORDER TRAVERSAL:
+-------------------
+10-4(L),13(R)
+4-3(L),7(R)
+3
+7-8(R)
+8
+13-12(L),27(R)
+12
+27-31(R)
+31-100(R)
+100
+--------------------
+POSTORDER TRAVERSAL:
+--------------------
+3
+8
+7-8(R)
+4-3(L),7(R)
+12
+100
+31-100(R)
+27-31(R)
+13-12(L),27(R)
+10-4(L),13(R)
+------------------
+INORDER TRAVERSAL:
+------------------
+3
+4-3(L),7(R)
+7-8(R)
+8
+10-4(L),13(R)
+12
+13-12(L),27(R)
+27-31(R)
+31-100(R)
+100
+-------------
+Tree size: 10
+Min node: 3
+Max node: 100
+-------------
+
+Tree after deleting 31:
+-------------------
+PREORDER TRAVERSAL:
+-------------------
+10-4(L),13(R)
+4-3(L),7(R)
+3
+7-8(R)
+8
+13-12(L),27(R)
+12
+27-100(R)
+100
+--------------------
+POSTORDER TRAVERSAL:
+--------------------
+3
+8
+7-8(R)
+4-3(L),7(R)
+12
+100
+27-100(R)
+13-12(L),27(R)
+10-4(L),13(R)
+------------------
+INORDER TRAVERSAL:
+------------------
+3
+4-3(L),7(R)
+7-8(R)
+8
+10-4(L),13(R)
+12
+13-12(L),27(R)
+27-100(R)
+100
+-------------
+Tree size: 9
+Min node: 3
+Max node: 100
+Value=4 -> node is present
+Value=12 -> node is present
+-------------
+
+Tree after deleting 100:
+-------------------
+PREORDER TRAVERSAL:
+-------------------
+10-4(L),13(R)
+4-3(L),7(R)
+3
+7-8(R)
+8
+13-12(L),27(R)
+12
+27
+--------------------
+POSTORDER TRAVERSAL:
+--------------------
+3
+8
+7-8(R)
+4-3(L),7(R)
+12
+27
+13-12(L),27(R)
+10-4(L),13(R)
+------------------
+INORDER TRAVERSAL:
+------------------
+3
+4-3(L),7(R)
+7-8(R)
+8
+10-4(L),13(R)
+12
+13-12(L),27(R)
+27
+-------------
+Tree size: 8
+Min node: 3
+Max node: 27
+Value=4 -> node is present
+Value=12 -> node is present
+-------------
+
+Tree after deleting 12:
+-------------------
+PREORDER TRAVERSAL:
+-------------------
+10-4(L),13(R)
+4-3(L),7(R)
+3
+7-8(R)
+8
+13-27(R)
+27
+--------------------
+POSTORDER TRAVERSAL:
+--------------------
+3
+8
+7-8(R)
+4-3(L),7(R)
+27
+13-27(R)
+10-4(L),13(R)
+------------------
+INORDER TRAVERSAL:
+------------------
+3
+4-3(L),7(R)
+7-8(R)
+8
+10-4(L),13(R)
+13-27(R)
+27
+-------------
+Tree size: 7
+Min node: 3
+Max node: 27
+Value=4 -> node is present
+Value=12 -> node is not present
+-------------
+
+Tree after deleting 3:
+-------------------
+PREORDER TRAVERSAL:
+-------------------
+10-4(L),13(R)
+4-7(R)
+7-8(R)
+8
+13-27(R)
+27
+--------------------
+POSTORDER TRAVERSAL:
+--------------------
+8
+7-8(R)
+4-7(R)
+27
+13-27(R)
+10-4(L),13(R)
+------------------
+INORDER TRAVERSAL:
+------------------
+4-7(R)
+7-8(R)
+8
+10-4(L),13(R)
+13-27(R)
+27
+-------------
+Tree size: 6
+Min node: 4
+Max node: 27
+Value=4 -> node is present
+Value=12 -> node is not present
+-------------
+
+Tree after deleting 4:
+-------------------
+PREORDER TRAVERSAL:
+-------------------
+10-7(L),13(R)
+7-8(R)
+8
+13-27(R)
+27
+--------------------
+POSTORDER TRAVERSAL:
+--------------------
+8
+7-8(R)
+27
+13-27(R)
+10-7(L),13(R)
+------------------
+INORDER TRAVERSAL:
+------------------
+7-8(R)
+8
+10-7(L),13(R)
+13-27(R)
+27
+-------------
+Tree size: 5
+Min node: 7
+Max node: 27
+Value=4 -> node is not present
+Value=12 -> node is not present
+-------------
+
+Tree after deleting 5:
+-------------------
+PREORDER TRAVERSAL:
+-------------------
+10-7(L),13(R)
+7-8(R)
+8
+13-27(R)
+27
+--------------------
+POSTORDER TRAVERSAL:
+--------------------
+8
+7-8(R)
+27
+13-27(R)
+10-7(L),13(R)
+------------------
+INORDER TRAVERSAL:
+------------------
+7-8(R)
+8
+10-7(L),13(R)
+13-27(R)
+27
+-------------
+Tree size: 5
+Min node: 7
+Max node: 27
+Value=4 -> node is not present
+Value=12 -> node is not present
+-------------
